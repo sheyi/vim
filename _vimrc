@@ -312,7 +312,8 @@ map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 map <F4> :silent! NERDTree<CR>
 
 "todo 搜索
-:map <F5> :Filter 
+:map <F5> :set ft=todo<CR>
+:map <c-F5> :Filter 
 "快速config
 map sconfig :e \$vim\/_vimrc
 
