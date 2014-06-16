@@ -16,14 +16,8 @@ map <C-D> dd
 
 let mapleader=','
 set helplang=cn
-autocmd! bufwritepost _vimrc source %         "自动载入配置文件不需要重启
+"autocmd! bufwritepost _vimrc source %         "自动载入配置文件不需要重启
 
-"切换到当前目录
-nmap <leader>q :execute "cd" expand("%:h")<CR>
-"搜索替换
-nmap <leader>s :,s///c
-"用于删除win32下难看的蓝色^M（其实是换行符\r） 
-nmap dm :%s/\r//g<cr> 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim7.1在windows下的编码设置。By Huadong.Liu
@@ -151,8 +145,6 @@ set ic                  " 搜索不区分大小写
 
 
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
-"winpos 5 5          " 设定窗口位置  
-"set lines=40 columns=155    " 设定窗口大小  
 "set go=             " 不要图形按钮  
 autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
 "autocmd InsertEnter * se cul    " 用浅色高亮当前行  
@@ -284,16 +276,6 @@ let html_ignore_folding=1 "不生成代码折叠
 :ab hw hello world
 :ab c3c4 C-3/C-4项目部
 
-"vimwiki
-let g:vimwiki_use_mouse = 1
-
-
-        let g:vimwiki_list = [
-                \{"path": "E:/wiki/", "path_html": "E:/wiki/html/",  
-                \   "html_footer": "E:/wiki/html/footer.tpl", "html_header": "E:/wiki/html/header.tpl",
-                \"syntax": "markdown",
-                \   "auto_export": 1}
-                \]
 
 "autocmd BufNewFile,BufRead *.quicktask setf quicktask
 
@@ -320,7 +302,21 @@ map <F4> :silent! NERDTree<CR>
 :map <F5> :set ft=todo<CR>
 :map <c-F5> :Filter 
 "快速config
-map sconfig :e \$vim\/_vimrc
+"map sconfig :e \$vim\/_vimrc
+"---------------------------------------- 
+" 使更新 _vimrc 更容易  # 译释：nmap 是绑定一个在normal模式下的快捷键
+":nmap ,s :source $VIM/_vimrc
+:nmap ,v :e $VIM/_vimrc
+"译释：在normal模式下，先后按下 ,s 两个键执行_vimrc，而 ,v 则是编辑_vimrc
+"切换到当前目录
+nmap <leader>q :execute "cd" expand("%:h")<CR>
+"搜索替换
+nmap <leader>s :%s///gc
+"用于删除win32下难看的蓝色^M（其实是换行符\r） 
+nmap dm :%s/\r//g<cr> 
+
+
+
 
 " Tab navigation
 nnoremap tp :tabprevious<CR>
@@ -329,55 +325,6 @@ nnoremap to :tabnew<CR>
 nnoremap tc :tabclose<CR>
 nnoremap gf <C-W>gf
 "@@@@@@@@@@@@以下请不要修改@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-"programm info
-"map <F4> :call TitleDet()<cr>'s   //这个写法是错误滴，E20: Mark not set
-"http://stackoverflow.com/questions/15554107/an-e20-mark-not-set-when-try-to-update-info-in-vim
-"what is the 's at the end ?? do you have mark s?
-map <F9> :call TitleDet()<cr>
-function AddTitle()
-call append(0, "/*===============================================================")
-call append(1, "*")
-call append(2, "* Author: clark")
-call append(3, "*")
-call append(4, "* E-mail:      ")
-call append(5, "*")
-call append(6, "* company: myself")
-call append(7, "*")
-call append(8, "* Last modified: ".strftime("%Y-%m-%d %H:%M"))
-call append(9, "*")
-call append(10, "* Filename: ".expand("%:t"))
-call append(11, "*")
-call append(12, "* Description: ")
-call append(13, "*")
-call append(14, "===============================================================*/")
-echohl WarningMsg | echo "Successful in adding the copyright." | echohl None 
-endfunction
-
-
-function UpdateTitle()
-    normal m'
-    execute '/* *Last modified:/s@:.*$@\=strftime(":\t%Y-%m-%d %H:%M")@'
-    normal ''
-    normal mk
-    execute '/* *Filename:/s@:.*$@\=":\t\t".expand("%:t")@'
-    execute "noh"
-    normal 'k
-    echohl WarningMsg | echo "Successful in updating the copy right." | echohl None
-endfunction
-
-
-function TitleDet()
-    while n < 14
-        let line = getline(n)
-        if line =~ '^\*\s*\S*Last\smodified:\S*.*$'
-            call UpdateTitle()
-            return
-        endif
-        let n = n + 1
-    endwhile
-    call AddTitle()
-endfunction
-
 
 " 在被分割的窗口间显示空白，便于阅读
 set fillchars=vert:\ ,stl:\ ,stlnc:\
@@ -385,7 +332,6 @@ set fillchars=vert:\ ,stl:\ ,stlnc:\
 "txtbrowser 默认是xbeta设置
 "let tlist_txt_settings = 'txt;c:content;f:figures;t:tables'
 "au BufRead,BufNewFile *.txt setlocal ft=txt
-
-    syntax on
-    filetype plugin on 
-    au BufEnter *.txt setlocal ft=txt
+syntax on
+filetype plugin on 
+au BufEnter *.txt setlocal ft=txt
