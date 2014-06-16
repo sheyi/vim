@@ -2,7 +2,7 @@ colorscheme solarized
 "colo morning		    " 设定配色方案
 "colo sheyi
 
-set guifont=YaHei_Consolas_Hybrid:h11                 "设置字体:字号（字体名称空格用下划线代替）
+set guifont=YaHei_Consolas_Hybrid:h12                 "设置字体:字号（字体名称空格用下划线代替）
 "set guifont=Courier_New:h10:cANSI	"设定字体
 
 set encoding=utf-8
@@ -16,9 +16,14 @@ map <C-D> dd
 
 let mapleader=','
 set helplang=cn
+autocmd! bufwritepost _vimrc source %         "自动载入配置文件不需要重启
 
-
-
+"切换到当前目录
+nmap <leader>q :execute "cd" expand("%:h")<CR>
+"搜索替换
+nmap <leader>s :,s///c
+"用于删除win32下难看的蓝色^M（其实是换行符\r） 
+nmap dm :%s/\r//g<cr> 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim7.1在windows下的编码设置。By Huadong.Liu
