@@ -2,9 +2,9 @@ colorscheme solarized
 "colo morning		    " 设定配色方案
 "colo sheyi
 
-set guifont=YaHei_Consolas_Hybrid:h12                 "设置字体:字号（字体名称空格用下划线代替）
+"set guifont=MONACO:h11
 "set guifont=Courier_New:h10:cANSI	"设定字体
-
+set guifont=YaHei_Consolas_Hybrid:h12                 "设置字体:字号（字体名称空格用下划线代替）
 set encoding=utf-8
 "call pathogen#runtime_append_all_bundles()	"插件打包
 execute pathogen#infect()
@@ -311,7 +311,9 @@ map <F4> :silent! NERDTree<CR>
 "切换到当前目录
 nmap <leader>q :execute "cd" expand("%:h")<CR>
 "搜索替换
-nmap <leader>s :%s///gc
+nmap <leader>t :%s///gc<left><left><left><left>
+nmap <leader>s /\<\><left><left>
+
 "用于删除win32下难看的蓝色^M（其实是换行符\r） 
 nmap dm :%s/\r//g<cr> 
 
