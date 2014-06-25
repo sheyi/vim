@@ -18,6 +18,9 @@ let mapleader=','
 set helplang=cn
 "autocmd! bufwritepost _vimrc source %         "自动载入配置文件不需要重启
 
+" 自动重新读入
+set autoread
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim7.1在windows下的编码设置。By Huadong.Liu
@@ -219,8 +222,8 @@ map <M-6> 6gt
 map <M-7> 7gt
 map <M-8> 8gt
 map <M-9> 9gt
-map <M-t> :tabnew<CR>
-map <M-w> :tabclose<CR>
+"map <M-t> :tabnew<CR>
+"map <M-w> :tabclose<CR>
 map! <M-1> <esc>1gt
 map! <M-2> <esc>2gt
 map! <M-3> <esc>3gt
@@ -230,9 +233,22 @@ map! <M-6> <esc>6gt
 map! <M-7> <esc>7gt
 map! <M-8> <esc>8gt
 map! <M-9> <esc>9gt
-map! <M-t> <esc>:tabnew<CR>
-map! <M-w> <esc>:tabclose<CR>
- 
+"map! <M-t> <esc>:tabnew<CR>
+"map! <M-w> <esc>:tabclose<CR>
+ " =============
+"nmap <C-t>   :tabnew<cr>
+"nmap <C-p>   :tabprevious<cr>
+"nmap <C-n>   :tabnext<cr>
+"nmap <C-k>   :tabclose<cr>
+"nmap <C-Tab> :tabnext<cr> 
+
+" Tab navigation
+nnoremap tp :tabprevious<CR>
+nnoremap tn :tabnext<CR>
+nnoremap to :tabnew<CR>
+nnoremap tc :tabclose<CR>
+nnoremap gf <C-W>gf
+
 " Use CTRL-S for saving, also in Insert mode
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
@@ -320,12 +336,6 @@ nmap dm :%s/\r//g<cr>
 
 
 
-" Tab navigation
-nnoremap tp :tabprevious<CR>
-nnoremap tn :tabnext<CR>
-nnoremap to :tabnew<CR>
-nnoremap tc :tabclose<CR>
-nnoremap gf <C-W>gf
 "@@@@@@@@@@@@以下请不要修改@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 " 在被分割的窗口间显示空白，便于阅读
