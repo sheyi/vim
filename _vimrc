@@ -106,7 +106,7 @@ endfunction
 set nocompatible            " 关闭 vi 兼容模式
 syntax enable
 syntax on                   " 自动语法高亮
-"set number                  " 显示行号
+set number                  " 显示行号
 set cursorline              " 突出显示当前行
 set ruler                   " 打开状态栏标尺
 set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)	"没有用
