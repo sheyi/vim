@@ -291,7 +291,7 @@ let html_ignore_folding=1 "不生成代码折叠
 "缩写
 :ab hw hello world
 :ab c3c4 C-3/C-4项目部
-
+:ab smore <!-- more -->
 
 "autocmd BufNewFile,BufRead *.quicktask setf quicktask
 
