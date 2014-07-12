@@ -324,7 +324,9 @@ map <F4> :silent! NERDTree<CR>
 ":nmap ,s :source $VIM/_vimrc
 :nmap ,v :e $VIM/_vimrc
 "译释：在normal模式下，先后按下 ,s 两个键执行_vimrc，而 ,v 则是编辑_vimrc
+
 "切换到当前目录
+"任何时候可用":cd %:p:h"来切换目录到当前编辑文件所在目录。
 nmap <leader>q :execute "cd" expand("%:h")<CR>
 "搜索替换
 nmap <leader>t :%s///gc<left><left><left><left>
@@ -335,6 +337,9 @@ nmap dm :%s/\r//g<cr>
 
 
 
+" "."重复上一个命令，"u"取消上一个命令,"^r"反取消
+" ^n, ^p用buf里的关键词补全。
+" 任何时候移到一个单词上按#的话可以高亮这个文档里所有一样的单词
 
 "@@@@@@@@@@@@以下请不要修改@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
