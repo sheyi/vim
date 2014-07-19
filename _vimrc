@@ -307,8 +307,9 @@ imap <c-h> <Left>
 " Ctrl + L 插入模式下光标向右移动
 imap <c-l> <Right>
 """nnoremap <silent> <F5> :YRShow<CR>
-imap ssj <c-r>=strftime("20%y-%m-%d %H:%M:%S")<cr>
-imap srq <c-r>=strftime("20%y-%m-%d")<cr>
+"这2个是可以的，采用ahk范围更广  2014-07-19 14:15:45 2014-07-19
+"imap ssj <c-r>=strftime("20%y-%m-%d %H:%M:%S")<cr>
+"imap srq <c-r>=strftime("20%y-%m-%d")<cr>
 map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 :map <F12> :!tex2ppt.bat
 "进行NerdTree的设置
