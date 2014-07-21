@@ -1,3 +1,21 @@
+set nocompatible
+source $VIMRUNTIME/vimrc_example.vim
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+"输入法设置
+if has('multi_byte_ime')
+	"未开启IME时光标背景色
+	hi Cursor guifg=bg guibg=Orange gui=NONE
+	"开启IME时光标背景色
+	hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
+	" 关闭Vim的自动切换IME输入法(插入模式和检索模式)
+	set iminsert=0 imsearch=0
+	" 插入模式输入法状态未被记录时，默认关闭IME
+	"inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+endif
+
+
 colorscheme solarized
 "colo morning		    " 设定配色方案
 "colo sheyi
@@ -26,15 +44,6 @@ set autoread
 au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 250)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim7.1在windows下的编码设置。By Huadong.Liu
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set encoding=utf-8
-"set fileencodings=utf-8,chinese,latin-1
-"if has("win32")
-"set fileencoding=chinese
-"else
-"set fileencoding=utf-8
-"endif
 "解决菜单乱码
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
@@ -76,9 +85,6 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strf
 
 
 set dictionary+=$VIMRUNTIME/../vimfiles/dic/sheyi.txt
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
 
 set diffexpr=MyDiff()
 function MyDiff()
@@ -106,7 +112,6 @@ function MyDiff()
 endfunction
 
 "set nowrap "设置不自动折行
-set nocompatible            " 关闭 vi 兼容模式
 syntax enable
 syntax on                   " 自动语法高亮
 set number                  " 显示行号
@@ -356,3 +361,6 @@ set fillchars=vert:\ ,stl:\ ,stlnc:\
 syntax on
 filetype plugin on 
 au BufEnter *.txt setlocal ft=txt
+
+"@@@@@@@@@@@@中文输入法问题@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+"http://fcitx.github.io/handbook/chapter-remote.html

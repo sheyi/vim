@@ -1,0 +1,94 @@
+1. 未验证
+http://forum.ubuntu.org.cn/viewtopic.php?f=86&t=370164
+let w:input_toggle = 0
+function Fcitx2en()
+let s:input_status = system("fcitx-remote")
+if s:input_status == 2
+let w:input_toggle = 1
+let l:a = system("fcitx-remote -c")
+endif
+endfunction
+
+function Fcitx2zh()
+let s:input_status = system("fcitx-remote")
+if s:input_status != 2 && w:input_toggle == 1
+let l:a = system("fcitx-remote -o")
+let w:input_toggle = 0
+endif
+endfunction
+
+set timeoutlen=150
+autocmd! InsertLeave * call Fcitx2en()
+autocmd! InsertEnter * call Fcitx2zh()
+========================================
+========================================
+vim 本身对 im 支持已经较好，
+set iminsert=0
+set imsearch=0
+
+2. 未验证
+http://tonysh-thu.blogspot.com/2010/09/gvim.html
+http://www.linuxsir.org/bbs/thread232881.html
+具体方法：
+在gvim的_vimrc中加入以下代码：
+
+if has("gui_running")
+  set imactivatekey=C-space
+  inoremap <ESC> <ESC>:set iminsert=0<CR>
+endif
+
+说明：
+1. set imactivatekey=C-space
+这一行的作用是让gvim控制输入法，好让下面的参数起作用。
+2. inoremap <ESC> <ESC>:set iminsert=0<CR>
+是在按下 ESC 的时候，自动关闭输入法，直接就可以修改文件了。
+如果需要更多的参数，可以用 help iminsert 来查看vim的帮助文件。
+
+3. 
+http://avnpc.com/pages/Vim_Config
+IME输入法切换设置
+在Win32环境下，Vim总是会自作聪明的自动切换到IME输入法。如果想要关闭自动切换，只需要设置
+
+set iminsert=0 imsearch=0
+即可，但由于Vim提供了判断IME输入是否打开的multi_byte_ime，我们就可以更加智能的加一些处理
+
+if has('multi_byte_ime')
+	"未开启IME时光标背景色
+	hi Cursor guifg=bg guibg=Orange gui=NONE
+	"开启IME时光标背景色
+	hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
+	" 关闭Vim的自动切换IME输入法(插入模式和检索模式)
+	set iminsert=0 imsearch=0
+	" 插入模式输入法状态未被记录时，默认关闭IME
+	"inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+endif
+以上设置可以记忆IME开启状态，并用不同的光标颜色提示当前输入法
+
+4. "@@@@@@@@@@@@中文输入法问题@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+"http://fcitx.github.io/handbook/chapter-remote.html
+
+let g:input_toggle = 1
+function! Fcitx2en()
+   let s:input_status = system("fcitx-remote")
+   if s:input_status == 2
+      let g:input_toggle = 1
+      let l:a = system("fcitx-remote -c")
+   endif
+endfunction
+
+function! Fcitx2zh()
+   let s:input_status = system("fcitx-remote")
+   if s:input_status != 2 && g:input_toggle == 1
+      let l:a = system("fcitx-remote -o")
+      let g:input_toggle = 0
+   endif
+endfunction
+
+set timeoutlen=150
+autocmd InsertLeave * call Fcitx2en()
+"autocmd InsertEnter * call Fcitx2zh()
+
+
+
+
+http://avnpc.com/pages/Vim_Config#toc_66189800
