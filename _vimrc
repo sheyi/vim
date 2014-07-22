@@ -41,7 +41,7 @@ set autoread
 
 "http://sjyf.org/2014/01/06/%E6%94%B9%E5%8F%98vim%E7%9A%84%E9%80%8F%E6%98%8E%E5%BA%A6/#more-629
 "透明度
-au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 250)
+"au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 250)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "解决菜单乱码
