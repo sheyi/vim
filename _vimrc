@@ -166,7 +166,7 @@ set novisualbell    " 不要闪烁(不明白)
 set foldenable      " 允许折叠  
 set foldmethod=manual   " 手动折叠  
 "cd E:\w		"默认工作目录
-cd E:\Dropbox\Docs	"默认工作目录
+cd E:\r\docs_b  "默认工作目录
 
 
 
@@ -298,7 +298,6 @@ let html_ignore_folding=1 "不生成代码折叠
 
 "缩写
 :ab hw hello world
-:ab c3c4 C-3/C-4项目部
 :ab smore <!-- more -->
 
 "autocmd BufNewFile,BufRead *.quicktask setf quicktask
@@ -307,14 +306,16 @@ let html_ignore_folding=1 "不生成代码折叠
 ":let g:notes_suffix = '.md'
 
 " Ctrl + K 插入模式下光标向上移动
-imap <c-k> <Up>
+"imap <c-k> <Up>
 " Ctrl + J 插入模式下光标向下移动
-imap <c-j> <Down>
+"imap <c-j> <Down>
 " Ctrl + H 插入模式下光标向左移动
-imap <c-h> <Left>
+"imap <c-h> <Left>
 " Ctrl + L 插入模式下光标向右移动
-imap <c-l> <Right>
+"imap <c-l> <Right>
 """nnoremap <silent> <F5> :YRShow<CR>
+
+imap jj <Esc><Right>
 "这2个是可以的，采用ahk范围更广  2014-07-19 14:15:45 2014-07-19
 "imap ssj <c-r>=strftime("20%y-%m-%d %H:%M:%S")<cr>
 "imap srq <c-r>=strftime("20%y-%m-%d")<cr>
