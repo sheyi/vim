@@ -264,7 +264,7 @@ inoremap <C-S> <C-O>:update<CR>
 
 "打开文件时自动回到上次编辑位置。
 if has("autocmd")
-   autocmd BufRead *.txt set tw=78
+   autocmd BufRead *.txt set tw=178 "由78改为178，免得todo自动换行
    autocmd BufReadPost *
       \ if line("'\"") > 0 && line ("'\"") <= line("$") |
       \   exe "normal g'\"" |
@@ -341,6 +341,7 @@ nmap <leader>q :execute "cd" expand("%:h")<CR>
 "搜索替换
 nmap <leader>t :%s///gc<left><left><left><left>
 nmap <leader>s /\<\><left><left>
+nmap <leader>w :g//t$<left><left><left>
 
 "用于删除win32下难看的蓝色^M（其实是换行符\r） 
 nmap dm :%s/\r//g<cr> 
