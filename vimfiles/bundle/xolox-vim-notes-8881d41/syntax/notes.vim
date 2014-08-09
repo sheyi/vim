@@ -1,6 +1,6 @@
 ﻿" Vim syntax script
 " Author: Peter Odding <peter@peterodding.com>
-" Last Change: November 25, 2011
+" Last Change: July 7, 2014
 " URL: http://peterodding.com/code/vim/notes/
 
 " Note: This file is encoded in UTF-8 including a byte order mark so
@@ -39,34 +39,44 @@ highlight def link notesListNumber Comment
 
 " Highlight quoted fragments. {{{2
 if xolox#notes#unicode_enabled()
-  syntax match notesDoubleQuoted /“.\{-}”/
-  syntax match notesSingleQuoted /‘.\{-}’/
+  syntax match notesDoubleQuoted /\w\@<!“.\{-}”\w\@!/
+  syntax match notesSingleQuoted /\w\@<!‘.\{-}’\w\@!/
 else
-  syntax match notesDoubleQuoted /".\{-}"/
-  syntax match notesSingleQuoted /`.\{-}'/
+  syntax match notesDoubleQuoted /\w\@<!".\{-}"\w\@!/
+  syntax match notesSingleQuoted /\w\@<!`.\{-}'\w\@!/
 endif
 highlight def link notesSingleQuoted Special
 highlight def link notesDoubleQuoted String
 
+" Highlight inline code fragments (same as Markdown syntax). {{{2
+if has('conceal')
+  syntax region notesInlineCode matchgroup=notesInlineCodeMarker start=/`/ end=/`/ concealends
+  highlight link notesItalicMarker notesInlineCodeMarker
+else
+  syntax match notesInlineCode /`[^`]*`/
+endif
+syntax cluster notesInline add=notesInlineCode
+highlight def link notesInlineCode Special
+
 " Highlight text emphasized in italic font. {{{2
 if has('conceal')
   syntax region notesItalic matchgroup=notesItalicMarker start=/\<_\k\@=/ end=/_\>\|\n/ contains=@Spell concealends
-  highlight link notesItalicMarker notesHiddenMarker 
+  highlight link notesItalicMarker notesHiddenMarker
 else
   syntax match notesItalic /\<_\k[^_]*\k_\>/
 endif
 syntax cluster notesInline add=notesItalic
-highlight notesItalic gui=italic
+highlight notesItalic gui=italic cterm=italic
 
 " Highlight text emphasized in bold font. {{{2
 if has('conceal')
-  syntax region notesBold matchgroup=notesBoldMarker start=/\*\k\@=/ end=/\k\@<=\*/ contains=@Spell concealends
-  highlight link notesBoldMarker notesHiddenMarker 
+  syntax region notesBold matchgroup=notesBoldMarker start=/\*\k\@=/ end=/\S\@<=\*/ contains=@Spell concealends
+  highlight link notesBoldMarker notesHiddenMarker
 else
   syntax match notesBold /\*\k[^*]*\k\*/
 endif
 syntax cluster notesInline add=notesBold
-highlight notesBold gui=bold
+highlight notesBold gui=bold cterm=bold
 
 " Highlight domain names, URLs, e-mail addresses and filenames. {{{2
 
@@ -76,7 +86,7 @@ highlight notesSubtleURL gui=underline guifg=fg
 syntax match notesTextURL @\<www\.\(\S*\w\)\+/\?@
 syntax cluster notesInline add=notesTextURL
 highlight def link notesTextURL notesSubtleURL
-syntax match notesRealURL @\<\(mailto:\|javascript:\|\w\{3,}://\)\(\S*\w\)\+/\?@
+execute printf('syntax match notesRealURL @%s@', g:xolox#notes#url_pattern)
 syntax cluster notesInline add=notesRealURL
 highlight def link notesRealURL notesSubtleURL
 if has('conceal')
@@ -99,6 +109,7 @@ highlight def link notesWindowsPath Directory
 syntax match notesTodo /\<TODO\>/
 syntax match notesXXX /\<XXX\>/
 syntax match notesFixMe /\<FIXME\>/
+syntax match notesInProgress /\<\(CURRENT\|INPROGRESS\|STARTED\|WIP\)\>/
 syntax match notesDoneItem /^\(\s\+\).*\<DONE\>.*\(\n\1\s.*\)*/ contains=@notesInline
 syntax match notesDoneMarker /\<DONE\>/ containedin=notesDoneItem
 highlight def link notesTodo WarningMsg
@@ -106,9 +117,10 @@ highlight def link notesXXX WarningMsg
 highlight def link notesFixMe WarningMsg
 highlight def link notesDoneItem Comment
 highlight def link notesDoneMarker Question
+highlight def link notesInProgress Directory
 
 " Highlight Vim command names in :this notation. {{{2
-syntax match notesVimCmd /:\w\+\(!\|\>\)/ contains=ALLBUT,@Spell
+syntax match notesVimCmd /\w\@<!:\w\+\(!\|\>\)/ contains=ALLBUT,@Spell
 syntax cluster notesInline add=notesVimCmd
 highlight def link notesVimCmd Special
 

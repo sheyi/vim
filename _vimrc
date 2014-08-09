@@ -302,8 +302,10 @@ let html_ignore_folding=1 "不生成代码折叠
 
 "autocmd BufNewFile,BufRead *.quicktask setf quicktask
 
-":let g:notes_directory = 'E:/github/notes'
-":let g:notes_suffix = '.md'
+:let g:notes_directories = ['E:/r/docs_b/notes','E:/r/docs_b/gtd']
+:let g:notes_title_sync = 'no'
+:let g:notes_suffix = '.txt'
+":let g:notes_directories = ['~/Documents/Notes', '~/Dropbox/Shared Notes']
 
 " Ctrl + K 插入模式下光标向上移动
 "imap <c-k> <Up>
@@ -327,6 +329,12 @@ map <F4> :silent! NERDTree<CR>
 "todo 搜索
 :map <F5> :set ft=todo<CR>
 :map <c-F5> :Filter 
+
+:map <F6> :SearchNotes //<left>
+:map <c-F6> :Note 
+
+
+
 "快速config
 "map sconfig :e \$vim\/_vimrc
 "---------------------------------------- 

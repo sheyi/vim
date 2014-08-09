@@ -1,6 +1,6 @@
 # Easy note taking in Vim
 
-The notes.vim plug-in for the [Vim text editor] [vim] makes it easy to manage your notes in Vim:
+The vim-notes plug-in for the [Vim text editor] [vim] makes it easy to manage your notes in Vim:
 
  * **Starting a new note:** Execute the `:Note` command to create a new buffer and load the appropriate file type and syntax
    * You can also start a note with Vim commands like `:edit`, `:tabedit` and `:split` by starting the filename with `note:`, as in `:edit note:todo` (the part after `note:` doesn't have to be the complete note title and if it's empty a new note will be created)
@@ -19,25 +19,39 @@ The notes.vim plug-in for the [Vim text editor] [vim] makes it easy to manage yo
  * **Writing aids:** The included file type plug-in contains mappings for automatic curly quotes, arrows and list bullets and supports completion of note titles using Control-X Control-U and completion of tags using Control-X Control-O
  * **Embedded file types:** The included syntax script supports embedded highlighting using blocks marked with `{{{type … }}}` which allows you to embed highlighted code and configuration snippets in your notes
 
-Here's a screen shot of the syntax mode using the [slate] [slate] color scheme:
+Here's a screen shot of the syntax mode using the [Slate] [slate] color scheme and the font [Monaco] [monaco]:
 
 ![Syntax mode screen shot](http://peterodding.com/code/vim/notes/syntax.png)
 
 ## Install & usage
 
-Unzip the most recent [ZIP archive] [download] file inside your Vim profile directory (usually this is `~/.vim` on UNIX and `%USERPROFILE%\vimfiles` on Windows), restart Vim and execute the command `:helptags ~/.vim/doc` (use `:helptags ~\vimfiles\doc` instead on Windows). To get started execute `:Note` or `:edit note:`, this will start a new note that contains instructions on how to continue from there (and how to use the plug-in in general).
+*Please note that the vim-notes plug-in requires my vim-misc plug-in which is separately distributed.*
+
+Unzip the most recent ZIP archives of the [vim-notes] [download-notes] and [vim-misc] [download-misc] plug-ins inside your Vim profile directory (usually this is `~/.vim` on UNIX and `%USERPROFILE%\vimfiles` on Windows), restart Vim and execute the command `:helptags ~/.vim/doc` (use `:helptags ~\vimfiles\doc` instead on Windows). To get started execute `:Note` or `:edit note:`, this will start a new note that contains instructions on how to continue from there (and how to use the plug-in in general).
+
+If you prefer you can also use [Pathogen] [pathogen], [Vundle] [vundle] or a similar tool to install & update the [vim-notes] [github-notes] and [vim-misc] [github-misc] plug-ins using a local clone of the git repository.
 
 ## Options
 
-All options have reasonable defaults so if the plug-in works after installation you don't need to change any options. They're available for people who like to customize their directory layout. These options can be configured in your [vimrc script] [vimrc] by including a line like this:
+All options have reasonable defaults so if the plug-in works after installation you don't need to change any options. The options are available for people who like to customize how the plug-in works. You can set these options in your [vimrc script] [vimrc] by including a line like this:
 
-    :let g:notes_directory = '~/Documents/Notes'
+    :let g:notes_directories = ['~/Documents/Notes', '~/Dropbox/Shared Notes']
 
 Note that after changing an option in your [vimrc script] [vimrc] you have to restart Vim for the changes to take effect.
 
-### The `g:notes_directory` option
+### The `g:notes_directories` option
 
-All your notes are stored together in one directory. This option defines the path of this directory.
+Your notes are stored in one or more directories. This option defines where you want to store your notes. Its value should be a list (there's an example above) with one or more pathnames. The default is a single value which depends on circumstances but should work for most people:
+
+ * If the profile directory where the plug-in is installed is writable, the directory `misc/notes/user` under the profile directory is used. This is for compatibility with [Pathogen] [pathogen]; the notes will be stored inside the plug-in's bundle.
+
+ * If the above doesn't work out, the default depends on the platform: `~/vimfiles/misc/notes/user` on Windows and `~/.vim/misc/notes/user` on other platforms.
+
+#### Backwards compatibility
+
+In the past the notes plug-in only supported a single directory and the corresponding option was called `g:notes_directory`. When support for multiple notes directories was introduced the option was renamed to `g:notes_directories` to reflect that the value is now a list of directory pathnames.
+
+For backwards compatibility with old configurations (all of them as of this writing :-) the notes plug-in still uses `g:notes_directory` when it is defined (its no longer defined by the plug-in). However when the plug-in warns you to change your configuration you probably should because this compatibility will be removed at some point.
 
 ### The `g:notes_suffix` option
 
@@ -50,6 +64,20 @@ The suffix to add to generated filenames. The plug-in generates filenames for yo
 When you rename a file in your notes directory but don't change the title, the plug-in will notice this the next time you open the note in Vim. Likewise when you change the title in another text editor but don't rename the file. By default the plug-in will prompt you whether you want it to update the title of the note, rename the file on disk or dismiss the prompt without doing anything.
 
 If you set this option to the string `'no'` this feature will be completely disabled. If you set it to `'change_title'` it will automatically change the title to match the filename. If you set it to `'rename_file'` it will automatically rename the file on disk to match the title.
+
+This option only concerns the behavior of vim-notes when you open an existing note; it does not change the fact that when you change a note's title in Vim and then save the note, the file is renamed (this is a fundamental feature of the vim-notes plug-in).
+
+### The `g:notes_word_boundaries` option
+
+Old versions of the notes plug-in would highlight note titles without considering word boundaries. This is still the default behavior but the plug-in can now be told to respect word boundaries by changing this option from its default:
+
+    :let g:notes_word_boundaries = 1
+
+### The `g:notes_unicode_enabled` option
+
+By default the vim-notes plug-in uses Unicode characters (e.g. list bullets, arrows, etc.) when Vim's ['encoding'] [enc] option is set to UTF-8. If you don't want Unicode characters in your notes (regardless of the ['encoding'] [enc] option) you can set this option to false (0):
+
+    :let g:notes_unicode_enabled = 0
 
 ### The `g:notes_smart_quotes` option
 
@@ -69,6 +97,18 @@ When you change the nesting level (indentation) of a line containing a bullet po
 
 The first level of list items gets the first bullet point in `g:notes_list_bullets`, the second level gets the second, etc. When you're indenting a list item to a level where the `g:notes_list_bullets` doesn't have enough bullets, the plug-in starts again at the first bullet in the list (in other words the selection of bullets wraps around).
 
+### The `g:notes_tab_indents` option
+
+By default `Tab` is mapped to indent list items and `Shift-Tab` is mapped to dedent list items. You can disable these mappings by adding the following to your [vimrc script] [vimrc]:
+
+    :let g:notes_tab_indents = 0
+
+### The `g:notes_alt_indents` option
+
+By default `Alt-Right` is mapped to indent list items and `Alt-Left` is mapped to dedent list items. You can disable these mappings by adding the following to your [vimrc script] [vimrc]:
+
+    :let g:notes_alt_indents = 0
+
 ### The `g:notes_shadowdir` option
 
 The notes plug-in comes with some default notes containing documentation about the plug-in. This option defines the path of the directory containing these notes.
@@ -85,9 +125,13 @@ This option defines the pathname of the Python script that's used to perform acc
 
 This option defines the pathname of the text file that stores the list of known tags used for tag name completion and the `:ShowTaggedNotes` command. The text file is created automatically when it's first needed, after that you can recreate it manually by executing `:IndexTaggedNotes` (see below).
 
+### The `g:notes_markdown_program` option
+
+The `:NoteToHtml` command requires the [Markdown] [markdown] program. By default the name of this program is assumed to be simply `markdown`. If you want to use a different program for Markdown to HTML conversion, set this option to the name of the program.
+
 ## Commands
 
-To edit one of your existing notes you can use Vim commands such as [:edit] [edit], [:split] [split] and [:tabedit] [tabedit] with a filename that starts with *note:* followed by (part of) the title of one of your notes, e.g.:
+To edit one of your existing notes (or create a new one) you can use Vim commands such as [:edit] [edit], [:split] [split] and [:tabedit] [tabedit] with a filename that starts with *note:* followed by (part of) the title of one of your notes, e.g.:
 
     :edit note:todo
 
@@ -95,7 +139,7 @@ This shortcut also works from the command line:
 
     $ gvim note:todo
 
-When you don't follow *note:* with anything a new note is created.
+When you don't follow *note:* with anything a new note is created like when you execute `:Note` without any arguments.
 
 ### The `:Note` command
 
@@ -103,11 +147,15 @@ When executed without any arguments this command starts a new note in the curren
 
 This command will fail when changes have been made to the current buffer, unless you use `:Note!` which discards any changes.
 
+When you are using multiple directories to store your notes and you run `:Note` while editing an existing note, a new note will inherit the directory of the note from which you started. Otherwise the note is created in the first directory in `g:notes_directories`.
+
 *This command supports tab completion:* If you complete one word, all existing notes containing the given word somewhere in their title are suggested. If you type more than one word separated by spaces, the plug-in will complete only the missing words so that the resulting command line contains the complete note title and nothing more.
 
 ### The `:NoteFromSelectedText` command
 
 Start a new note in the current window with the selected text as the title of the note. The name of this command isn't very well suited to daily use, that's because it's intended to be executed from a mapping. The default mapping for this command is `\en` (the backslash is actually the character defined by the [mapleader] [mapleader] variable).
+
+When you are using multiple directories to store your notes and you run `:NoteFromSelectedText` while editing an existing note, the new note will inherit the directory of the note from which it was created.
 
 ### The `:SplitNoteFromSelectedText` command
 
@@ -161,6 +209,10 @@ This command makes it easy to find all notes related to the current file: If you
 
 If you execute the `:RecentNotes` command it will open a Vim buffer that lists all your notes grouped by the day they were edited, starting with your most recently edited note. If you pass an argument to `:RecentNotes` it will filter the list of notes by matching the title of each note against the argument which is interpreted as a Vim pattern.
 
+### The `:MostRecentNote` command
+
+This command edits your most recently edited note (whether you just opened the note or made changes to it). The plug-in will remember the most recent note between restarts of Vim and is shared between all instances of Vim.
+
 ### The `:ShowTaggedNotes` command
 
 To show a list of all notes that contains *@tags* you can use the `:ShowTaggedNotes` command. If you pass a count to this command it will limit the list of tags to those that have been used at least this many times. For example the following two commands show tags that have been used at least ten times:
@@ -175,6 +227,24 @@ The notes plug-in defines an omni completion function that can be used to comple
 The completion menu is populated from a text file listing all your tags, one on each line. The first time omni completion triggers, an index of tag names is generated and saved to the location set by `g:notes_tagsindex`. After this file is created, it will be updated automatically as you edit notes and add/remove tags.
 
 If for any reason you want to recreate the list of tags you can execute the `:IndexTaggedNotes` command.
+
+### The `:NoteToHtml` command
+
+This command converts the current note to HTML. It works by first converting the current note to [Markdown] [markdown] and then using the `markdown` program to convert that to HTML. It requires an external program to convert Markdown to HTML. By default the program `markdown` is used, but you can change the name of the program using the `g:notes_markdown_program` option.
+
+Note that this command can be a bit slow, because the parser for the note taking syntax is written in Vim script (for portability) and has not been optimized for speed (yet).
+
+### The `:NoteToMarkdown` command
+
+Convert the current note to a [Markdown document] [markdown]. The vim-notes syntax shares a lot of similarities with the Markdown text format, but there are some notable differences, which this command takes care of:
+
+ * The first line of a note is an implicit document title. In Markdown format it has to be marked with `#`. This also implies that the remaining headings should be shifted by one level.
+
+ * Preformatted blocks are marked very differently in notes and Markdown (`{{{` and `}}}` markers versus 4 space indentation).
+
+ * The markers and indentation of list items differ between notes and Markdown (dumb bullets vs Unicode bullets and 3 vs 4 spaces).
+
+Note that this command can be a bit slow, because the parser for the note taking syntax is written in Vim script (for portability) and has not been optimized for speed (yet).
 
 ## Mappings
 
@@ -226,6 +296,7 @@ See the documentation of the [:highlight] [highlight] command for more informati
  * `notesTodo` - `TODO` markers
  * `notesXXX` - `XXX` markers
  * `notesFixMe` - `FIXME` markers
+ * `notesInProgress` - `CURRENT`, `INPROGRESS`, `STARTED` and `WIP` markers
  * `notesDoneItem` - lines containing the marker `DONE`, usually highlighted as a comment
  * `notesDoneMarker` - `DONE` markers
  * `notesVimCmd` - Vim commands, words preceded by an `:` character
@@ -266,20 +337,27 @@ If you have questions, bug reports, suggestions, etc. the author can be contacte
 
 ## License
 
-This software is licensed under the [MIT license] [mit].  
-© 2011 Peter Odding &lt;<peter@peterodding.com>&gt;.
+This software is licensed under the [MIT license] [mit].
+© 2014 Peter Odding &lt;<peter@peterodding.com>&gt;.
 
 
 [ctrlwf]: http://vimdoc.sourceforge.net/htmldoc/windows.html#CTRL-W_f
 [ctrlwgf]: http://vimdoc.sourceforge.net/htmldoc/windows.html#CTRL-W_gf
-[download]: http://peterodding.com/code/vim/downloads/notes.zip
+[download-misc]: http://peterodding.com/code/vim/downloads/misc.zip
+[download-notes]: http://peterodding.com/code/vim/downloads/notes.zip
 [edit]: http://vimdoc.sourceforge.net/htmldoc/editing.html#:edit
+[enc]: http://vimdoc.sourceforge.net/htmldoc/options.html#'encoding'
 [gf]: http://vimdoc.sourceforge.net/htmldoc/editing.html#gf
+[github-misc]: http://github.com/xolox/vim-misc
+[github-notes]: http://github.com/xolox/vim-notes
 [highlight]: http://vimdoc.sourceforge.net/htmldoc/syntax.html#:highlight
 [levenshtein]: http://en.wikipedia.org/wiki/Levenshtein_distance
 [mapleader]: http://vimdoc.sourceforge.net/htmldoc/map.html#mapleader
+[markdown]: http://en.wikipedia.org/wiki/Markdown
 [mit]: http://en.wikipedia.org/wiki/MIT_License
 [modeline]: http://vimdoc.sourceforge.net/htmldoc/options.html#modeline
+[monaco]: http://en.wikipedia.org/wiki/Monaco_(typeface)
+[pathogen]: http://www.vim.org/scripts/script.php?script_id=2332
 [python]: http://python.org/
 [shell]: http://www.vim.org/scripts/script.php?script_id=3123
 [slate]: http://code.google.com/p/vim/source/browse/runtime/colors/slate.vim
@@ -293,4 +371,5 @@ This software is licensed under the [MIT license] [mit].
 [vimgrep]: http://vimdoc.sourceforge.net/htmldoc/quickfix.html#:vimgrep
 [vimrc]: http://vimdoc.sourceforge.net/htmldoc/starting.html#vimrc
 [voom]: http://www.vim.org/scripts/script.php?script_id=2657
+[vundle]: https://github.com/gmarik/vundle
 [write]: http://vimdoc.sourceforge.net/htmldoc/editing.html#:write
