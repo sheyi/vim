@@ -28,9 +28,9 @@ set encoding=utf-8
 execute pathogen#infect()
 
 "Delete current line
-nmap <C-D> dd
-imap <C-D> <ESC>ddi
-map <C-D> dd
+"nmap <C-D> dd
+"imap <C-D> <ESC>ddi
+"map <C-D> dd
 
 let mapleader=','
 set helplang=cn
@@ -258,9 +258,9 @@ nnoremap tc :tabclose<CR>
 nnoremap gf <C-W>gf
 
 " Use CTRL-S for saving, also in Insert mode
-noremap <C-S> :update<CR>
-vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <C-O>:update<CR>
+"noremap <C-S> :update<CR>
+"vnoremap <C-S> <C-C>:update<CR>
+"inoremap <C-S> <C-O>:update<CR>
 
 "打开文件时自动回到上次编辑位置。
 if has("autocmd")
@@ -317,7 +317,7 @@ let html_ignore_folding=1 "不生成代码折叠
 "imap <c-l> <Right>
 """nnoremap <silent> <F5> :YRShow<CR>
 
-imap jj <Esc><Right>
+imap jk <Esc><Right>
 "这2个是可以的，采用ahk范围更广  2014-07-19 14:15:45 2014-07-19
 "imap ssj <c-r>=strftime("20%y-%m-%d %H:%M:%S")<cr>
 "imap srq <c-r>=strftime("20%y-%m-%d")<cr>
@@ -354,7 +354,29 @@ nmap <leader>w :g//t$<left><left><left>
 "用于删除win32下难看的蓝色^M（其实是换行符\r） 
 nmap dm :%s/\r//g<cr> 
 
+" 方便跳出编辑环境, 同时也方便进行列插入的操作
+"inoremap <c-i> <ESC><ESC>
+"再贴几个：（个人感觉以s开头的键按起来最快， 还有就是以ctrl开头的按键也很快，因为前者刚好在
+"左手的地方，而后者可以同步左手板按下去，都很快）
 
+" 方便进入搜索模式
+"nnoremap sl /\v
+"nnoremap s; ?
+
+" 方便进入命令模式
+nnoremap sj :
+vnoremap sj :
+
+" 方便进行save的操作，虽然ctrl+s比较熟悉但是经常按还是比较麻烦
+"nnoremap sw :wq<CR>
+nnoremap sw :wq
+nnoremap sq :q!
+
+" 方便在普通模式下在当前行进行移动
+nnoremap sn g$
+nnoremap sb g^
+vnoremap sn g$
+vnoremap sb g^
 
 " "."重复上一个命令，"u"取消上一个命令,"^r"反取消
 " ^n, ^p用buf里的关键词补全。
