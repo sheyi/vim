@@ -364,12 +364,17 @@ nmap dm :%s/\r//g<cr>
 "nnoremap s; ?
 
 " 方便进入命令模式
-nnoremap sj :
-vnoremap sj :
+"nnoremap sj :
+"vnoremap sj :
+
+"1. 将分号和冒号互换
+"nnoremap ; :
+"nnoremap : ;
+"这样输入 :w 这样的命令时可以就少敲一个键了。
 
 " 方便进行save的操作，虽然ctrl+s比较熟悉但是经常按还是比较麻烦
 "nnoremap sw :wq<CR>
-nnoremap sw :wq
+"nnoremap sw :wq
 nnoremap sq :q!
 
 " 方便在普通模式下在当前行进行移动
