@@ -383,6 +383,11 @@ nnoremap sb g^
 vnoremap sn g$
 vnoremap sb g^
 
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
+nnoremap <leader>( viw<esc>a)<esc>hbi(<esc>lel
+nnoremap <leader>[ viw<esc>a]<esc>hbi[<esc>lel
+:map <space> viw
 " "."重复上一个命令，"u"取消上一个命令,"^r"反取消
 " ^n, ^p用buf里的关键词补全。
 " 任何时候移到一个单词上按#的话可以高亮这个文档里所有一样的单词
