@@ -84,7 +84,9 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strf
 "set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
 
 
-set dictionary+=$VIMRUNTIME/../vimfiles/dic/sheyi.txt
+"set dictionary-=$VIM/vimfiles/dic/sheyi.txt dictionary+=$VIM/vimfiles/dic/sheyi.txt
+set dictionary-=E:/r/docs_b/pc/vim_dic.txt dictionary+=E:/r/docs_b/pc/vim_dic.txt
+set complete-=k complete+=k
 
 set diffexpr=MyDiff()
 function MyDiff()
@@ -392,6 +394,10 @@ nnoremap <leader>[ viw<esc>a]<esc>hbi[<esc>lel
 " ^n, ^p用buf里的关键词补全。
 " 任何时候移到一个单词上按#的话可以高亮这个文档里所有一样的单词
 
+nnoremap ` @a
+"第二步，让 ` 在visual模式下可用
+vnoremap ` :normal @a
+
 "@@@@@@@@@@@@以下请不要修改@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 " 在被分割的窗口间显示空白，便于阅读
@@ -406,3 +412,20 @@ au BufEnter *.txt setlocal ft=txt
 
 "@@@@@@@@@@@@中文输入法问题@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 "http://fcitx.github.io/handbook/chapter-remote.html
+
+"autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType java set omnifunc=javacomplete#Complete
+"autocmd FileType php set omnifunc=phpcomplete#Complete
+"只有在是PHP文件时，才启用PHP补全
+au FileType php call AddPHPFuncList()
+function AddPHPFuncList()
+    "set dictionary-=e:/Greensofts/Vim/vimfiles/dic/php.txt dictionary+=e:/Greensofts/Vim/vimfiles/dic/php.txt
+	set dictionary-=$VIM/vimfiles/dic/php.txt dictionary+=$VIM/vimfiles/dic/php.txt
+    set complete-=k complete+=k
+endfunction
+"于是我们在编辑相应的文件的时候，按下C-X C-O就能唤出自动补全的窗口了
