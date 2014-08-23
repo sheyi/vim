@@ -69,7 +69,7 @@ au GUIENTER * simalt ~x  "打开文件自动最大化
 "Toggle Menu and Toolbar
 set guioptions-=m
 set guioptions-=T
-map <silent> <F3> :if &guioptions =~# 'T' <Bar>
+map <silent> <F9> :if &guioptions =~# 'T' <Bar>
         \set guioptions-=T <Bar>
         \set guioptions-=m <bar>
     \else <Bar>
@@ -185,16 +185,33 @@ set backspace=indent,eol,start
 "filetype indent on
 let g:tex_flavor='latex'
 
-
-
+"-----------------------------------------------------------
+"Ctags
+"安装：将ctags.exe放到和gvim.exe同目录下，输入命令:! ctags -R *生成tags文件
+"：ts <name> 这个是将含有name的所有文件列出来，然后你按1 2 3 4就可以选择了
+"Ctrl+] 这个一按直接跳转了
+"Ctrl+T 这个一按就跳回去了
+"{{
+""set tags=tags
+set tags=D:\\tags
+let Tlist_Ctags_Cmd = 'ctags'
+let Tlist_Show_One_File = 1            "不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Exit_OnlyWindow = 1          "如果taglist窗口是最后一个窗口，则退出vim
 let g:winManagerWindowLayout='FileExplorer|TagList'
-nmap wm :WMToggle<cr>
+nmap wm :WMToggle
+"生成一个tags文件
+nmap <F4> <Esc>:!ctags -R *<CR>
+"}}
 
+
+"let g:winManagerWindowLayout='FileExplorer|TagList'
+"nmap wm :WMToggle<cr>
+
+"set tags=tags;"ctags
 
 let g:miniBufExplMapWindowNavVim = 1	"则可以用<C-h,j,k,l>切换到上下左右的窗口中去,
 let g:miniBufExplMapWindowNavArrows = 1	"是用<C-箭头键>切换到上下左右窗口中去
 
-set tags=tags;"ctags
 let g:SuperTabRetainCompletionType=2	"supertab
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
@@ -326,7 +343,8 @@ imap jk <Esc><Right>
 map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 :map <F12> :!tex2ppt.bat
 "进行NerdTree的设置
-map <F4> :silent! NERDTree<CR>
+"map <F4> :silent! NERDTree<CR>
+map <silent> <F10> :NERDTreeToggle <CR> "F2开启nerdtree
 
 "todo 搜索
 :map <F5> :set ft=todo<CR>

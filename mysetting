@@ -1,0 +1,119 @@
+" 自动重新读入
+set autoread
+
+"http://sjyf.org/2014/01/06/%E6%94%B9%E5%8F%98vim%E7%9A%84%E9%80%8F%E6%98%8E%E5%BA%A6/#more-629
+"透明度
+"au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 250)
+
+au GUIENTER * simalt ~x  "打开文件自动最大化
+
+"set dictionary-=$VIM/vimfiles/dic/sheyi.txt dictionary+=$VIM/vimfiles/dic/sheyi.txt
+set dictionary-=E:/r/docs_b/pc/vim_dic.txt dictionary+=E:/r/docs_b/pc/vim_dic.txt
+set complete-=k complete+=k
+
+cd E:\r\docs_b  "默认工作目录
+
+let g:tex_flavor='latex'
+
+let g:winManagerWindowLayout='FileExplorer|TagList'
+nmap wm :WMToggle<cr>
+
+set dy=lastline "显示最多行，不用@@
+
+"缩写
+:ab hw hello world
+:ab smore <!-- more -->
+
+imap jk <Esc><Right>
+"这2个是可以的，采用ahk范围更广  2014-07-19 14:15:45 2014-07-19
+"imap ssj <c-r>=strftime("20%y-%m-%d %H:%M:%S")<cr>
+"imap srq <c-r>=strftime("20%y-%m-%d")<cr>
+map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+:map <F12> :!tex2ppt.bat
+"进行NerdTree的设置
+map <F4> :silent! NERDTree<CR>
+
+"todo 搜索
+:map <F5> :set ft=todo<CR>
+:map <c-F5> :Filter 
+
+:map <F6> :SearchNotes //<left>
+:map <c-F6> :Note 
+
+:map <F7> :Fsgrep //<left>
+
+:nmap ,v :e $VIM/_vimrc
+nmap <leader>q :execute "cd" expand("%:h")<CR>
+"搜索替换
+nmap <leader>t :%s///gc<left><left><left><left>
+nmap <leader>s /\<\><left><left>
+nmap <leader>w :g//t$<left><left><left>
+
+"用于删除win32下难看的蓝色^M（其实是换行符\r） 
+nmap dm :%s/\r//g<cr> 
+
+" 方便跳出编辑环境, 同时也方便进行列插入的操作
+"inoremap <c-i> <ESC><ESC>
+"再贴几个：（个人感觉以s开头的键按起来最快， 还有就是以ctrl开头的按键也很快，因为前者刚好在
+"左手的地方，而后者可以同步左手板按下去，都很快）
+
+" 方便进入搜索模式
+"nnoremap sl /\v
+"nnoremap s; ?
+
+" 方便进入命令模式
+"nnoremap sj :
+"vnoremap sj :
+
+"1. 将分号和冒号互换
+"nnoremap ; :
+"nnoremap : ;
+"这样输入 :w 这样的命令时可以就少敲一个键了。
+
+" 方便进行save的操作，虽然ctrl+s比较熟悉但是经常按还是比较麻烦
+"nnoremap sw :wq<CR>
+"nnoremap sw :wq
+nnoremap sq :q!
+
+" 方便在普通模式下在当前行进行移动
+nnoremap sn g$
+nnoremap sb g^
+vnoremap sn g$
+vnoremap sb g^
+
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
+nnoremap <leader>( viw<esc>a)<esc>hbi(<esc>lel
+nnoremap <leader>[ viw<esc>a]<esc>hbi[<esc>lel
+:map <space> viw
+" "."重复上一个命令，"u"取消上一个命令,"^r"反取消
+" ^n, ^p用buf里的关键词补全。
+" 任何时候移到一个单词上按#的话可以高亮这个文档里所有一样的单词
+
+nnoremap ` @a
+"第二步，让 ` 在visual模式下可用
+vnoremap ` :normal @a
+
+"@@@@@@@@@@@@以下请不要修改@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+"@@@@@@@@@@@@中文输入法问题@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+"http://fcitx.github.io/handbook/chapter-remote.html
+
+"autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType java set omnifunc=javacomplete#Complete
+"autocmd FileType php set omnifunc=phpcomplete#Complete
+"只有在是PHP文件时，才启用PHP补全
+au FileType php call AddPHPFuncList()
+function AddPHPFuncList()
+    "set dictionary-=e:/Greensofts/Vim/vimfiles/dic/php.txt dictionary+=e:/Greensofts/Vim/vimfiles/dic/php.txt
+	set dictionary-=$VIM/vimfiles/dic/php.txt dictionary+=$VIM/vimfiles/dic/php.txt
+    set complete-=k complete+=k
+endfunction
+"于是我们在编辑相应的文件的时候，按下C-X C-O就能唤出自动补全的窗口了
