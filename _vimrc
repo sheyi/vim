@@ -1,8 +1,8 @@
 set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
+"source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
-
+set wildmenu
 "输入法设置
 if has('multi_byte_ime')
 	"未开启IME时光标背景色
@@ -21,7 +21,7 @@ colorscheme solarized
 "colo sheyi
 
 "set guifont=MONACO:h11
-"set guifont=Courier_New:h10:cANSI	"设定字体
+set guifont=Courier_New:h10:cANSI	"设定字体
 set guifont=YaHei_Consolas_Hybrid:h12                 "设置字体:字号（字体名称空格用下划线代替）
 set encoding=utf-8
 "call pathogen#runtime_append_all_bundles()	"插件打包
