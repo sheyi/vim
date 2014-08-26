@@ -1,4 +1,4 @@
-" Last Change: 2014-08-26 14:25:11 巴基斯坦标准时间
+" Last Change: 2014-08-26 15:45:13 巴基斯坦标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 if filereadable("C:/notepad.txt")
@@ -26,8 +26,9 @@ endif
 
 "set guifont=Courier_New:h10:cANSI	"设定字体
 colorscheme solarized
-"colo morning		    " 设定配色方案
-
+" colo morning		    " 设定配色方案
+" colorscheme molokai
+" colorscheme tango2
 "cd E:\r\docs_b  "默认工作目录
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
