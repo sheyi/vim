@@ -1,4 +1,4 @@
-" Last Change: 2014-08-26 15:45:13 巴基斯坦标准时间
+" Last Change: 2014-08-27 00:40:45 中国标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 if filereadable("C:/notepad.txt")
@@ -16,7 +16,8 @@ behave mswin
 if g:notepad
     " set guifont=YaHei_Consolas_Hybrid:h11  
     set guifont=MONACO:h11:cANSI
-    set guifontwide=YouYuan:h12
+    " set guifontwide=YouYuan:h12
+    set guifont=YaHei\ Mono:h12
 else
     " set guifont=YaHei_Consolas_Hybrid:h13  
     " set gfw=YouYuan:h14
@@ -25,9 +26,10 @@ else
 endif
 
 "set guifont=Courier_New:h10:cANSI	"设定字体
-colorscheme solarized
+" colorscheme solarized
 " colo morning		    " 设定配色方案
-" colorscheme molokai
+" 感觉这个在笔记本上最好
+colorscheme molokai
 " colorscheme tango2
 "cd E:\r\docs_b  "默认工作目录
 
