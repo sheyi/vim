@@ -21,8 +21,8 @@ if g:atCompany
     " set tags+=D:/Ruchee/Files/code/sdk.m.5399.com/tags
     " set tags+=D:/Ruchee/Files/code/pay.m.5399.com/tags
 
-    set tags+=D:/Ruchee/Ruby/lib/ruby/tags
-    set tags+=D:/Ruchee/Ruby/lib/ruby/gems/tags
+    set tags+=D:/tags
+    set tags+=D:/tags
 else
     set tags+=~/.rvm/rubies/tags
     set tags+=~/.rvm/gems/tags
@@ -236,26 +236,7 @@ au BufRead,BufNewFile hosts      setlocal ft=conf
 au BufRead,BufNewFile http*.conf setlocal ft=apache
 
 
-" 设置着色模式和字体
-if g:isWIN
-    if g:isGUI
-        if g:atCompany
-            colorscheme molokai
-            set guifont=Monaco:h12
-        else
-            colorscheme molokai
-            set guifont=Monaco:h11
-        endif
-    endif
-else
-    if g:isGUI
-        colorscheme molokai
-        set guifont=Monaco\ 11
-    else
-        colorscheme tango2
-        set guifont=Monaco\ 11
-    endif
-endif
+
 
 
 set backspace=2              " 设置退格键可用
@@ -836,3 +817,4 @@ let blog.template_ext     = '.html'
 let blog.auto_export      = 1
 
 let g:vimwiki_list = [blog]
+source $VIM/sheyi.vim
