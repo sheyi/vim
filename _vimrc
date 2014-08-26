@@ -302,6 +302,7 @@ if g:isGUI
     set guioptions-=b        " 隐藏底部滚动条
     set showtabline=0        " 隐藏Tab栏
     set cursorline           " 突出显示当前行
+    set cursorcolumn
 endif
 
 
