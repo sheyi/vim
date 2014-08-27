@@ -1,4 +1,4 @@
-" Last Change: 2014-08-27 17:26:04 巴基斯坦标准时间
+" Last Change: 2014-08-27 23:29:33 中国标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 if filereadable("C:/notepad.txt")
@@ -17,7 +17,7 @@ if g:notepad
     " set guifont=YaHei_Consolas_Hybrid:h11  
     " set guifont=MONACO:h11:cANSI
     " set guifontwide=YouYuan:h12
-    set guifont=YaHei\ Mono:h12
+    set guifont=YaHei\ Mono:h11
     " 感觉这个在笔记本上最好
     colorscheme molokai
 else
