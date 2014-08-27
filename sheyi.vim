@@ -1,4 +1,4 @@
-" Last Change: 2014-08-27 00:40:45 中国标准时间
+" Last Change: 2014-08-27 14:21:38 巴基斯坦标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 if filereadable("C:/notepad.txt")
@@ -15,21 +15,25 @@ behave mswin
 
 if g:notepad
     " set guifont=YaHei_Consolas_Hybrid:h11  
-    set guifont=MONACO:h11:cANSI
+    " set guifont=MONACO:h11:cANSI
     " set guifontwide=YouYuan:h12
     set guifont=YaHei\ Mono:h12
+    " 感觉这个在笔记本上最好
+    colorscheme molokai
 else
     " set guifont=YaHei_Consolas_Hybrid:h13  
     " set gfw=YouYuan:h14
-    set guifont=MONACO:h11:cANSI
-    set guifontwide=YouYuan:h14
+    " set guifont=MONACO:h11:cANSI
+    " set guifontwide=YouYuan:h14
+    set guifont=YaHei\ Mono:h13
+	" set background=light
+	" set background=dark
+    colorscheme solarized
 endif
 
 "set guifont=Courier_New:h10:cANSI	"设定字体
 " colorscheme solarized
 " colo morning		    " 设定配色方案
-" 感觉这个在笔记本上最好
-colorscheme molokai
 " colorscheme tango2
 "cd E:\r\docs_b  "默认工作目录
 
@@ -72,6 +76,9 @@ imap jk <Esc><Right>
 :map <F7> :Fsgrep //<left>
 
 " Key mappings for the quickfix commands
+" :map <F9> :e E:/r/docs_b/pc/vim_functions.txt
+:map <F9> :<C-r>y
+" nmap <F10> :tabnext<CR>
 nmap <F11> :cn<CR>
 nmap <F12> :bp<CR>
 " :set pastetoggle=<F11>
@@ -80,7 +87,7 @@ noremap  <Down>      gj
 noremap  <Up>        gk
 
 "用于删除win32下难看的蓝色^M（其实是换行符\r） 
-nmap dm :%s/\r//g<cr> 
+" nmap dm :%s/\r//g<cr> 
 
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
@@ -91,14 +98,19 @@ nmap dm :%s/\r//g<cr>
 nnoremap ,q :q!
 nnoremap ,w :wq
 
-nnoremap ,j gj
-nnoremap ,h gh
-nnoremap ,k gk
+" nnoremap ,j gj
+" nnoremap ,h gh
+" nnoremap ,k gk
 
 nnoremap ,f g$
 nnoremap ,a g^
 vnoremap ,f g$
 vnoremap ,a g^
+
+nnoremap ,i <esc>O<esc>50i=<esc>a//分界线<c-r>=strftime("20%y-%m-%d %H:%M:%S")<cr> <esc>j
+nnoremap ,n <esc>GOsubject: <c-r>=strftime("20%y-%m-%d")<cr>
+" 复制函数到y寄存器
+nnoremap ,y <esc>"yyy
 
 "去掉每行行首的空格 :%s/^\s+//gc
 " nnoremap ,x :%s/^ *//gc	

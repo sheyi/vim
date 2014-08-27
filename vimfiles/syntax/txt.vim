@@ -15,6 +15,9 @@ hi link todoProject  txtReference
 hi link todoContext  txtTitle
 hi link todoDate  txtApostrophe
 
+
+syntax keyword sheyiTitle title
+hi link sheyiTitle txtEmailMsg
 " ================================================================================
 " hi link txtUrl      Underlined"ModeMsg"Tabline"PmenuSbar
 " hi link txtTitle      Title"ModeMsg"Tabline"PmenuSbar
