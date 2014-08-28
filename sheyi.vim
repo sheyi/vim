@@ -1,4 +1,4 @@
-" Last Change: 2014-08-28 10:57:00 巴基斯坦标准时间
+" Last Change: 2014-08-28 23:32:16 中国标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================
@@ -80,8 +80,9 @@ map k gk
 
 " Key mappings for the quickfix commands
 " :map <F9> :e E:/r/docs_b/pc/vim_functions.txt
-:map <F9> :<C-r>y
+:map <F8> :<C-r>y
 " nmap <F10> :tabnext<CR>
+nmap <F9> :cp<CR>
 nmap <F10> :cn<CR>
 nmap <F11> :bp<CR>
 nmap <F12> :bn<CR>
@@ -127,11 +128,13 @@ nnoremap ,x :s/^\s\+//g
 " 将多行空行替换为一行，输入命令:%s/\n\{3,\}/\r\r/e
 
 nmap ,v :e $VIM/sheyi.vim
-nmap ,c :execute "cd" expand("%:h")<CR>
+nmap <leader>c :execute "cd" expand("%:h")<CR>
 nmap ,t :%s///gc<left><left><left><left>
-nmap ,s /\<\><left><left>
+nmap <leader>s /\<\><left><left>
+nmap ,z :vimgrep //gj **/*.txt<left><left><left><left><left><left><left><left><left><left><left> 
 nmap ,g :g//t$<left><left><left>
-nmap ,z :vimgrep // **/*.*<left><left><left><left><left><left><left><left>
+nmap ,s :vimgrep // **/*.*<left><left><left><left><left><left><left><left>
+nmap ,c :copen
 " 查找的结果可以用":copen"命令查看 :cc  :cn  :cp
 "http://www.nerdlinux.com/post/43/
 
@@ -232,3 +235,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
 nmap <leader>bq :bp <BAR> bd #<CR>
+" 搜索光标下的单词
+nmap <leader>lv :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr> 
+
