@@ -1,6 +1,7 @@
-" Last Change: 2014-08-27 23:29:33 中国标准时间
+" Last Change: 2014-08-28 10:57:00 巴基斯坦标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
+" ================================================================================
 if filereadable("C:/notepad.txt")
     let g:notepad = 1
 else
@@ -9,6 +10,7 @@ endif
 
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
+" ================================================================================
 set noerrorbells            " 关闭错误信息响铃
 set novisualbell            " 关闭使用可视响铃代替呼叫
 behave mswin
@@ -48,10 +50,9 @@ iab adn and
 iab scc C-3/C-4项目部
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
+" ================================================================================
 map Y y$
 nnoremap S s$
-
-
 
 map <leader>sa ggVG"
 map <C-c> "+y 
@@ -61,11 +62,13 @@ vnoremap <F3> "+y
 map <F4>		<Esc><Esc>"+gP
 
 
-imap jk <Esc><Right>
+" imap jk <Esc><Right>
 " :map <F12> :!tex2ppt.bat
 "进行NerdTree的设置
-
+map j gj
+map k gk
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
+" ================================================================================
 "todo 搜索
 :map <F5> :set ft=todo<CR>
 :map <c-F5> :Filter 
@@ -79,18 +82,20 @@ imap jk <Esc><Right>
 " :map <F9> :e E:/r/docs_b/pc/vim_functions.txt
 :map <F9> :<C-r>y
 " nmap <F10> :tabnext<CR>
-nmap <F11> :cn<CR>
-nmap <F12> :bp<CR>
+nmap <F10> :cn<CR>
+nmap <F11> :bp<CR>
+nmap <F12> :bn<CR>
 " :set pastetoggle=<F11>
 
-noremap  <Down>      gj
-noremap  <Up>        gk
+" noremap  <Down>      gj
+" noremap  <Up>        gk
 
 "用于删除win32下难看的蓝色^M（其实是换行符\r） 
 " nmap dm :%s/\r//g<cr> 
 
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
+" ================================================================================
 " 方便进入命令模式
 "nnoremap sj :
 "vnoremap sj :
@@ -155,6 +160,7 @@ vnoremap <leader>[ <esc>a]<esc>gvo<esc>i[<esc>gvo<esc>ll
 "透明度
 "au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 250)
 
+" ================================================================================
 "set dictionary-=$VIM/vimfiles/dic/sheyi.txt dictionary+=$VIM/vimfiles/dic/sheyi.txt
 set dictionary-=E:/r/docs_b/pc/vim_dic.txt dictionary+=E:/r/docs_b/pc/vim_dic.txt
 set complete-=k complete+=k
@@ -195,10 +201,10 @@ let g:update_time_begin_line = 0
 let g:update_time_end_line = 10
 let g:update_time_enable = 1
 
-" ================================================================================
+" ================================================================================括号彩色显示
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
-" ================================================================================
+" ================================================================================tags设置
 " 这是告诉vim在当前目录找不到tags文件时请到上层目录查找。
 set tags=tags;/
 
@@ -216,3 +222,13 @@ nnoremap,m :cs find t
 nmap <leader>to <Esc>GoTODO <C-R>=strftime("%Y-%m-%d")  <CR>
 
 nmap <leader>t :NERDTreeToggle<CR> 
+
+" ================================================================================显示与关闭buffers
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
