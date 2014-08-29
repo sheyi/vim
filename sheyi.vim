@@ -1,4 +1,4 @@
-" Last Change: 2014-08-28 23:32:16 中国标准时间
+" Last Change: 2014-08-29 17:22:14 巴基斯坦标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================
@@ -13,6 +13,9 @@ endif
 " ================================================================================
 set noerrorbells            " 关闭错误信息响铃
 set novisualbell            " 关闭使用可视响铃代替呼叫
+set ic            " 忽略大小写
+set ambiwidth=double    "utf-8时vim显示半个字符的解决办法 某种字体中文引号问题
+
 behave mswin
 
 if g:notepad
@@ -28,6 +31,7 @@ else
     " set guifont=MONACO:h11:cANSI
     " set guifontwide=YouYuan:h14
     set guifont=YaHei\ Mono:h13
+
 	" set background=light
 	" set background=dark
     colorscheme solarized
@@ -37,6 +41,7 @@ endif
 " colorscheme solarized
 " colo morning		    " 设定配色方案
 " colorscheme tango2
+" set t_Co=256                 "设置终端256色显示
 "cd E:\r\docs_b  "默认工作目录
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
