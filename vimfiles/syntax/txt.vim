@@ -4,7 +4,7 @@ finish
 endif
 
 "================================================================================
-syntax keyword SheyiKey shey hxl info 佘义
+syntax keyword SheyiKey shey hxl info phase done todo 佘义
 syn match       SheyiKey /黄总/
 "syn match       todoDate        /\w\?{[^}]\+}[+=-]\?/
 syn match       todoDate        /\d\{4\}-\d\{2\}-\d\{2\}/
