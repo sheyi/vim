@@ -1,4 +1,4 @@
-" Last Change: 2014-08-29 20:56:57 巴基斯坦标准时间
+" Last Change: 2014-08-30 09:43:38 巴基斯坦标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================
@@ -107,7 +107,7 @@ nmap <F12> :bn<CR>
 "vnoremap sj :
 
 nnoremap ,q :q!
-nnoremap ,w :wq
+" nnoremap ,w :wq
 
 " nnoremap ,j gj
 " nnoremap ,h gh
@@ -119,7 +119,9 @@ vnoremap ,f g$
 vnoremap ,a g^
 
 nnoremap ,i <esc>O<esc>50i=<esc>a//分界线<c-r>=strftime("20%y-%m-%d %H:%M:%S")<cr> <esc>j
-nnoremap ,n <esc>GOsubject: <c-r>=strftime("20%y-%m-%d")<cr>
+" nnoremap ,n <esc>GOsubject: <c-r>=strftime("20%y-%m-%d")<cr>
+nnoremap ,ws <esc>GOsubject: 
+nnoremap ,wp <esc>Ophase: <c-r>=strftime("20%y-%m-%d")<cr>
 " 复制函数到y寄存器
 nnoremap ,y <esc>"yyy
 
