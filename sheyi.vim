@@ -1,7 +1,7 @@
-" Last Change: 2014-08-30 10:29:00 巴基斯坦标准时间
+" Last Change: 2014-08-30 15:55:18 巴基斯坦标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
-" ================================================================================
+" ================================================================================电脑选择
 if filereadable("C:/notepad.txt")
     let g:notepad = 1
 else
@@ -10,7 +10,7 @@ endif
 
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
-" ================================================================================
+" ================================================================================一般设置
 set noerrorbells            " 关闭错误信息响铃
 set novisualbell            " 关闭使用可视响铃代替呼叫
 set ic            " 忽略大小写
@@ -72,16 +72,14 @@ map <F4>		<Esc><Esc>"+gP
 map j gj
 map k gk
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
-" ================================================================================
+" ================================================================================功能键设置
 nnoremap <silent> <F3> :Grep<CR>
-"todo 搜索
-:map <F5> :set ft=todo<CR>
-:map <c-F5> :Filter 
-
-:map <F6> :SearchNotes //<left>
-:map <c-F6> :Note 
-
-:map <F7> :Fsgrep //<left>
+" "todo 搜索
+" :map <F5> :set ft=todo<CR>
+" :map <c-F5> :Filter 
+" :map <F6> :SearchNotes //<left>
+" :map <c-F6> :Note 
+" :map <F7> :Fsgrep //<left>
 
 " Key mappings for the quickfix commands
 " :map <F9> :e E:/r/docs_b/pc/vim_functions.txt
@@ -101,17 +99,12 @@ nmap <F12> :bn<CR>
 
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
-" ================================================================================
+" ================================================================================逗号键
 " 方便进入命令模式
 "nnoremap sj :
 "vnoremap sj :
 
 nnoremap ,q :q!
-" nnoremap ,w :wq
-
-" nnoremap ,j gj
-" nnoremap ,h gh
-" nnoremap ,k gk
 
 nnoremap ,f g$
 nnoremap ,a g^
@@ -123,6 +116,7 @@ nnoremap ,i <esc>O<esc>50i=<esc>a//分界线<c-r>=strftime("20%y-%m-%d %H:%M:%S"
 nnoremap ,ws <esc>GOsubject: 
 nnoremap ,wp <esc>ophase: <c-r>=strftime("20%y-%m-%d")<cr>
 nnoremap ,wd <esc>ophase: <c-r>=strftime("20%y-%m-%d")<cr> done
+nnoremap ,wo <esc>A<space>done <c-r>=strftime("20%y-%m-%d")<cr>
 " 复制函数到y寄存器
 nnoremap ,y <esc>"yyy
 
@@ -171,7 +165,7 @@ vnoremap <leader>[ <esc>a]<esc>gvo<esc>i[<esc>gvo<esc>ll
 "透明度
 "au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 250)
 
-" ================================================================================
+" ================================================================================自定义补全词典
 "set dictionary-=$VIM/vimfiles/dic/sheyi.txt dictionary+=$VIM/vimfiles/dic/sheyi.txt
 set dictionary-=E:/r/docs_b/pc/vim_dic.txt dictionary+=E:/r/docs_b/pc/vim_dic.txt
 set complete-=k complete+=k
@@ -198,12 +192,12 @@ endif
 
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
-" ================================================================================
+" ================================================================================markdown
 " markdown
 let g:vim_markdown_no_default_key_mappings=1
 
 
-" ================================================================================
+" ================================================================================last change
 " last change
 " Automatically update change time
 let g:update_time_time_stamp_leader = 'Last Change: '
@@ -219,7 +213,7 @@ let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 " 这是告诉vim在当前目录找不到tags文件时请到上层目录查找。
 set tags=tags;/
 
-" ================================================================================
+" ================================================================================cscope
 "cscope定位函数就靠这个文件了  现在载入他  也可以在vim中用命令载入  运行:cs help 查看相关介绍 
 cs a e:\w\cscope.out 
 cs a e:\r\docs_b\cscope.out 
@@ -229,9 +223,10 @@ cs a e:\r\docs_b\cscope.out
 nnoremap,p :cs find g <C-R>=expand("<cword>")<CR> 
 nnoremap,m :cs find t 
 
-" ================================================================================
+" ================================================================================todo.txt
 nmap <leader>to <Esc>GoTODO <C-R>=strftime("%Y-%m-%d")  <CR>
 
+" ================================================================================NerdTree
 nmap <leader>t :NERDTreeToggle<CR> 
 
 " ================================================================================显示与关闭buffers
@@ -245,4 +240,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 nmap <leader>bq :bp <BAR> bd #<CR>
 " 搜索光标下的单词
 nmap <leader>lv :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr> 
-
+"
+" 在 quickfix 窗口显示上次查找
+nnoremap <leader>? :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
