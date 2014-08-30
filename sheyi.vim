@@ -1,4 +1,4 @@
-" Last Change: 2014-08-29 17:22:14 巴基斯坦标准时间
+" Last Change: 2014-08-29 20:56:57 巴基斯坦标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================
@@ -19,18 +19,17 @@ set ambiwidth=double    "utf-8时vim显示半个字符的解决办法 某种字�
 behave mswin
 
 if g:notepad
-    " set guifont=YaHei_Consolas_Hybrid:h11  
-    " set guifont=MONACO:h11:cANSI
-    " set guifontwide=YouYuan:h12
-    set guifont=YaHei\ Mono:h11
+    set guifont=MONACO:h11:cANSI
+    set guifontwide=YaHei_Consolas_Hybrid:h12
     " 感觉这个在笔记本上最好
     colorscheme molokai
 else
     " set guifont=YaHei_Consolas_Hybrid:h13  
-    " set gfw=YouYuan:h14
-    " set guifont=MONACO:h11:cANSI
+    " set guifont=YaHei\ Mono:h13
+    "
+    set guifont=MONACO:h12:cANSI
+    set guifontwide=YaHei_Consolas_Hybrid:h13
     " set guifontwide=YouYuan:h14
-    set guifont=YaHei\ Mono:h13
 
 	" set background=light
 	" set background=dark
@@ -74,6 +73,7 @@ map j gj
 map k gk
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================
+nnoremap <silent> <F3> :Grep<CR>
 "todo 搜索
 :map <F5> :set ft=todo<CR>
 :map <c-F5> :Filter 
