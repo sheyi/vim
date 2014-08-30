@@ -1,4 +1,4 @@
-" Last Change: 2014-08-30 15:55:18 巴基斯坦标准时间
+" Last Change: 2014-08-31 00:16:06 中国标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -20,7 +20,7 @@ behave mswin
 
 if g:notepad
     set guifont=MONACO:h11:cANSI
-    set guifontwide=YaHei_Consolas_Hybrid:h12
+    set guifontwide=YaHei_Consolas_Hybrid:h11
     " 感觉这个在笔记本上最好
     colorscheme molokai
 else
@@ -214,15 +214,35 @@ let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 set tags=tags;/
 
 " ================================================================================cscope
-"cscope定位函数就靠这个文件了  现在载入他  也可以在vim中用命令载入  运行:cs help 查看相关介绍 
+" cscope
 cs a e:\w\cscope.out 
 cs a e:\r\docs_b\cscope.out 
+" 这样vim就会在当前目录自动寻找cscope.out文件并引用了。 上面第一个配置是设置cscope可以使用quickfix窗口。当我们要查找函数的调用时，只会跳转到第一个结果，这时候，输入:cw打开quickfix窗口即可在新的quickfix窗口中查看其余的结果，用回车或双击跳转。 使用Cscope时，通常用下面这个命令：
+" :cs f c|d|e|f|g|i|s|t name
+" s         查找本c符号(可以跳过注释)
+" g         查找本定义
+" d         查找本函数调用的函数
+" c         查找调用本函数的函数
+" t         查找本字符串
+" e         查找本egrep模式
+" f         查找本文件
+" i         查找包含本文件的文件
+"cscope定位函数就靠这个文件了  现在载入他  也可以在vim中用命令载入  运行:cs help 查看相关介绍 
 
 "搜索函数定义的位置 
 " map <C-g> :cs find g <C-R>=expand("<cword>")<CR> 
 nnoremap,p :cs find g <C-R>=expand("<cword>")<CR> 
 nnoremap,m :cs find t 
-
+" Cscope mappings
+nnoremap <C-w>\ :scs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+nnoremap <C-\>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 " ================================================================================todo.txt
 nmap <leader>to <Esc>GoTODO <C-R>=strftime("%Y-%m-%d")  <CR>
 
