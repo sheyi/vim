@@ -1,4 +1,4 @@
-" Last Change: 2014-08-31 18:27:16
+" Last Change: 2014-08-31 22:20:34
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -19,7 +19,7 @@ set nojoinspaces "no space add when join two lines.(用j命令合并两行时, �
 behave mswin
 
 if g:notepad
-    set guifont=MONACO:h11:cANSI
+    set guifont=MONACO:h10:cANSI
     set guifontwide=YaHei_Consolas_Hybrid:h11
     " 感觉这个在笔记本上最好
     colorscheme molokai
