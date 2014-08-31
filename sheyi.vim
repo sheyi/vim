@@ -1,4 +1,4 @@
-" Last Change: 2014-08-31 10:36:10 巴基斯坦标准时间
+" Last Change: 2014-08-31 18:27:16
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -15,7 +15,7 @@ set noerrorbells            " 关闭错误信息响铃
 set novisualbell            " 关闭使用可视响铃代替呼叫
 set ic            " 忽略大小写
 set ambiwidth=double    "utf-8时vim显示半个字符的解决办法 某种字体中文引号问题
-
+set nojoinspaces "no space add when join two lines.(用j命令合并两行时, 不在之间加空格.)
 behave mswin
 
 if g:notepad
@@ -71,6 +71,10 @@ map <F4>		<Esc><Esc>"+gP
 "进行NerdTree的设置
 map j gj
 map k gk
+noremap zh 10h
+noremap zj 10j
+noremap zk 10k
+noremap zl 10l
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================功能键设置
 nnoremap <silent> <F3> :Grep<CR>
@@ -206,7 +210,7 @@ let g:vim_markdown_no_default_key_mappings=1
 " last change
 " Automatically update change time
 let g:update_time_time_stamp_leader = 'Last Change: '
-let g:update_time_time_format = '%Y-%m-%d %H:%M:%S %Z'
+let g:update_time_time_format = '%Y-%m-%d %H:%M:%S'
 let g:update_time_begin_line = 0
 let g:update_time_end_line = 10
 let g:update_time_enable = 1
@@ -294,3 +298,4 @@ nmap <leader>lv :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>
 "
 " 在 quickfix 窗口显示上次查找
 nnoremap <leader>? :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
+
