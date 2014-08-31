@@ -1,4 +1,4 @@
-" Last Change: 2014-08-31 00:16:06 中国标准时间
+" Last Change: 2014-08-31 10:36:10 巴基斯坦标准时间
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -94,11 +94,24 @@ nmap <F12> :bn<CR>
 " noremap  <Down>      gj
 " noremap  <Up>        gk
 
-"用于删除win32下难看的蓝色^M（其实是换行符\r） 
-" nmap dm :%s/\r//g<cr> 
 
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
+" ================================================================================-键
+" 删除无内容的行，但保留换行
+nmap -ab :%s/^\(\s\+\)$//g<CR>:echo <CR>
+
+"去掉每行行首的空格 :%s/^\s+//gc
+nnoremap -aa :s/^\s\+//g
+
+"用于删除win32下难看的蓝色^M（其实是换行符\r） 
+nmap -am :%s/\r//g<cr> 
+
+" 删除行尾空格，输入命令:%s/\s\+$//
+" 删除行头空格，输入命令:%s/^\s\+//
+" 删除空行，    输入命令:%g/^$/d
+" 将多行空行替换为一行，输入命令:%s/\n\{3,\}/\r\r/e
+
 " ================================================================================逗号键
 " 方便进入命令模式
 "nnoremap sj :
@@ -120,14 +133,6 @@ nnoremap ,wo <esc>A<space>done <c-r>=strftime("20%y-%m-%d")<cr>
 " 复制函数到y寄存器
 nnoremap ,y <esc>"yyy
 
-"去掉每行行首的空格 :%s/^\s+//gc
-" nnoremap ,x :%s/^ *//gc	
-nnoremap ,x :s/^\s\+//g
-
-" 删除行尾空格，输入命令:%s/\s\+$//
-" 删除行头空格，输入命令:%s/^\s\+//
-" 删除空行，    输入命令:%g/^$/d
-" 将多行空行替换为一行，输入命令:%s/\n\{3,\}/\r\r/e
 
 nmap ,v :e $VIM/sheyi.vim
 nmap <leader>c :execute "cd" expand("%:h")<CR>
@@ -231,18 +236,44 @@ cs a e:\r\docs_b\cscope.out
 
 "搜索函数定义的位置 
 " map <C-g> :cs find g <C-R>=expand("<cword>")<CR> 
-nnoremap,p :cs find g <C-R>=expand("<cword>")<CR> 
-nnoremap,m :cs find t 
+" nnoremap,p :cs find g <C-R>=expand("<cword>")<CR> 
+" nnoremap,m :cs find t 
 " Cscope mappings
-nnoremap <C-w>\ :scs find c <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>s :scs find s <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>g :scs find g <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>d :scs find d <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>c :scs find c <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>t :scs find t <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>e :scs find e <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-nnoremap <C-\>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+" nnoremap <C-w>\ :scs find c <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <C-\>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <C-\>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <C-\>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <C-\>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <C-\>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <C-\>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <C-\>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+" nnoremap <C-\>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+
+
+nmap -s :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+nmap -g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap -c :cs find c <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+nmap -t :cs find t <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+nmap -e :cs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+nmap -f :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
+nmap -i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
+nmap -d :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+" cs find c|d|e|f|g|i|s|t name
+" 0 或 s 查找本 C 符号(可以跳过注释)
+" 1 或 g 查找本定义
+" 2 或 d 查找本函数调用的函数
+" 3 或 c 查找调用本函数的函数
+" 4 或 t 查找本字符串
+" 6 或 e 查找本 egrep 模式
+" 7 或 f 查找本文件
+" 8 或 i 查找包含本文件的文件
+" 简单来说，主要功能就是同时搜索ctags和cscope的标签，并且cscope优先扫描。
+if has("cscope")
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+    set csto=0
+    set cst
+    set csverb
+endif
 " ================================================================================todo.txt
 nmap <leader>to <Esc>GoTODO <C-R>=strftime("%Y-%m-%d")  <CR>
 
