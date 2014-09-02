@@ -1,4 +1,4 @@
-" Last Change: 2014-09-01 11:12:51
+" Last Change: 2014-09-02 19:34:57
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -151,9 +151,9 @@ nnoremap ,wo <esc>A<space>done <c-r>=strftime("20%y-%m-%d")<cr>
 nnoremap ,y <esc>"yyy
 
 
-nmap ,v :e $VIM/sheyi.vim
+nmap ,v :e $VIM/sheyi.vim <cr>
 nmap <leader>c :execute "cd" expand("%:h")<CR>
-nmap ,t :%s///gc<left><left><left><left>
+nmap ,re :%s///gc<left><left><left><left>
 nmap <leader>s /\<\><left><left>
 nmap ,z :vimgrep //gj **/*.txt<left><left><left><left><left><left><left><left><left><left><left> 
 nmap ,g :g//t$<left><left><left>
@@ -162,6 +162,10 @@ nmap ,c :copen
 " 查找的结果可以用":copen"命令查看 :cc  :cn  :cp
 "http://www.nerdlinux.com/post/43/
 
+
+nmap ,tr :Tab //r2<left><left><left>
+nmap ,tl :Tab //l2<left><left><left>
+nmap ,tc :Tab //c2<left><left><left>
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
 nnoremap <leader>( viw<esc>a)<esc>hbi(<esc>lel
@@ -217,7 +221,7 @@ endif
 " ================================================================================markdown
 " markdown
 let g:vim_markdown_no_default_key_mappings=1
-
+let g:vim_markdown_folding_disabled=1
 
 " ================================================================================last change
 " last change
