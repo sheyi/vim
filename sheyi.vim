@@ -1,4 +1,4 @@
-" Last Change: 2014-09-02 19:34:57
+" Last Change: 2014-09-03 10:54:15
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -11,12 +11,16 @@ endif
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================一般设置
-set noerrorbells            " 关闭错误信息响铃
-set novisualbell            " 关闭使用可视响铃代替呼叫
-set ic            " 忽略大小写
-set ambiwidth=double    "utf-8时vim显示半个字符的解决办法 某种字体中文引号问题
-set nojoinspaces "no space add when join two lines.(用j命令合并两行时, 不在之间加空格.)
+
+set noerrorbells           "  关闭错误信息响铃
+set novisualbell           "  关闭使用可视响铃代替呼叫
+set ic                     "  忽略大小写
+set ambiwidth=double       "  utf-8时vim显示半个字符的解决办法 某种字体中文引号问题
+set nojoinspaces           "  no space add when join two lines.(用j命令合并两行时, 不在之间加空格.)
+set whichwrap=b,s,<,>,[,]  "  对某一个或几个按键开启到头后自动折向下一行的功能
+
 behave mswin
+
 
 if g:notepad
     set guifont=MONACO:h10:cANSI
@@ -117,6 +121,8 @@ nmap -ar :g/^\(.*\)\n\1$/d  "要消除连续的重复行可以这样：
 nmap -as :g/{/ .+1,/}/-1 sort  "大括号内排序
 nmap -az :%s/\(为.\)./\1\r/gc
 
+" nmap -ax :g/^pattern/s/$/mytext "Add text to the end of a line that begins with a certain string.
+"
 " nmap -ax :s/\n\n\@!/ / "【例5】把以回车排版、以空行分段的文本变成以回车分段的文本
 " nmap -ax :g/./,/^$/j "同上
 
@@ -303,9 +309,9 @@ nmap <leader>t :NERDTreeToggle<CR>
 
 " ================================================================================显示与关闭buffers
 " Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
