@@ -1,0 +1,19 @@
+snippet p       可执行标识
+	phase `strftime("%Y-%m-%d")` ${0}
+snippet s       可执行标识
+	subject: `strftime("%Y-%m-%d")` ${0}
+snippet i       可执行标识
+	info `strftime("%Y-%m-%d")` ${0}
+snippet t       可执行标识
+	TODO `strftime("%Y-%m-%d")` ${0}
+snippet doc_i
+	/**
+	 * ${2:undocumented class}
+	 *
+	 * @package ${3:default}
+	 * @author ${4:`g:snips_author`}
+	 **/
+	interface ${1:}
+	{${5}
+	} // END interface $1
+# class ...
