@@ -1,4 +1,4 @@
-" Last Change: 2014-09-04 19:43:15
+" Last Change: 2014-09-07 16:47:05
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -121,6 +121,8 @@ nmap -am :%s/\r//g<cr>  "用于删除^M
 nmap -al :g/^/s//\=line(".")/    " 等价于:g/^/s/^/\=line(".")/
 nmap -ar :g/^\(.*\)\n\1$/d  "要消除连续的重复行可以这样： 
 nmap -as :g/{/ .+1,/}/-1 sort  "大括号内排序
+nmap -ak vi{:sort             "先选左括号大括号内排序
+nmap -av vgp `[v`]
 nmap -az :%s/\(为.\)./\1\r/gc
 
 " nmap -ax :g/^pattern/s/$/mytext "Add text to the end of a line that begins with a certain string.
@@ -161,7 +163,7 @@ nnoremap ,y <esc>"yyy
 
 nmap ,v :e $VIM/sheyi.vim <cr>
 nmap <leader>c :execute "cd" expand("%:h")<CR>
-nmap ,re :%s///gc<left><left><left><left>
+nmap ,r :%s///gc<left><left><left><left>
 nmap <leader>s /\<\><left><left>
 nmap ,z :vimgrep //gj **/*.txt<left><left><left><left><left><left><left><left><left><left><left> 
 nmap ,g :g//t$<left><left><left>
@@ -324,3 +326,10 @@ nmap <leader>lv :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>
 " 在 quickfix 窗口显示上次查找
 nnoremap <leader>? :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
 
+" Input method
+   set iminsert=0
+   set imsearch=0
+   se imd
+   au InsertEnter * se noimd
+   au InsertLeave * se imd
+   au FocusGained * se imd

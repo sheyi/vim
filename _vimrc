@@ -515,9 +515,9 @@ let g:snipMate.scope_aliases['xhtml']      = 'html'
 let NERDSpaceDelims = 1                        " 自动添加前置空格
 
 " AuthorInfoDetect    自动添加作者、时间等信息，本质是NERD_commenter && authorinfo的结合
-let g:vimrc_author   = 'Ruchee'                " 昵称
-let g:vimrc_email    = 'my@ruchee.com'         " 邮箱
-let g:vimrc_homepage = 'http://www.ruchee.com' " 个人主页
+let g:vimrc_author   = 'sheyi'                " 昵称
+let g:vimrc_email    = 'sheyee@163.com'         " 邮箱
+let g:vimrc_homepage = 'http://higrid.net' " 个人主页
 
 " Indent_guides       显示对齐线
 let g:indent_guides_enable_on_vim_startup = 0  " 默认关闭
