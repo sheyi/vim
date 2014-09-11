@@ -1,4 +1,4 @@
-" Last Change: 2014-09-07 16:47:05
+" Last Change: 2014-09-11 07:53:16
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -68,8 +68,8 @@ map <leader>sa ggVG"
 map <C-c> "+y 
 map <C-v> "+p 
 
-vnoremap <F3> "+y
-map <F4>		<Esc><Esc>"+gP
+" vnoremap <F3> "+y
+" map <F4>		<Esc><Esc>"+gP
 
 
 " imap jk <Esc><Right>
@@ -151,7 +151,7 @@ nnoremap ,a g^
 vnoremap ,f g$
 vnoremap ,a g^
 
-nnoremap ,i <esc>O<esc>50i=<esc>a//分界线<c-r>=strftime("20%y-%m-%d %H:%M:%S")<cr> <esc>j
+nnoremap ,i <esc>O==分界线==8<=<esc>50i~<esc>a//<c-r>=strftime("20%y-%m-%d %H:%M:%S")<cr> <esc>j
 " nnoremap ,n <esc>GOsubject: <c-r>=strftime("20%y-%m-%d")<cr>
 nnoremap ,ws <esc>GOsubject: 
 nnoremap ,wp <esc>ophase: <c-r>=strftime("20%y-%m-%d")<cr>
@@ -327,9 +327,9 @@ nmap <leader>lv :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>
 nnoremap <leader>? :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
 
 " Input method
-   set iminsert=0
-   set imsearch=0
-   se imd
-   au InsertEnter * se noimd
-   au InsertLeave * se imd
-   au FocusGained * se imd
+" set iminsert=0
+" set imsearch=0
+" se imd
+" au InsertEnter * se noimd
+" au InsertLeave * se imd
+" au FocusGained * se imd
