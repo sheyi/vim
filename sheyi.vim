@@ -1,4 +1,4 @@
-" Last Change: 2014-09-11 07:53:16
+" Last Change: 2014-09-13 14:54:32
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -333,3 +333,18 @@ nnoremap <leader>? :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
 " au InsertEnter * se noimd
 " au InsertLeave * se imd
 " au FocusGained * se imd
+
+" ================================================================================latex 设置
+" 估计大家都打开了换行时自动对齐的功能，但是有没有发现这样一个问题，在用 itemize 的时候，每一个 item 都会自动缩进两个，非常麻烦。如果你懒得搞的话，最后就变成了这个样子：
+let g:tex_indent_items=0
+autocmd BufNewFile,BufRead *.tex set spell  "拼写检查
+let g:tex_flavor='latex'
+let g:Tex_DefaultTargetFormat = 'pdf'
+command! Tex call Tex()
+function! Tex()
+    w
+    !latex %
+    silent !dvipdfmx  %:r
+    silent ! start %:r.pdf
+    
+endfunction
