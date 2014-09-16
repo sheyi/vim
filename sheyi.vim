@@ -1,4 +1,4 @@
-" Last Change: 2014-09-16 11:11:58
+" Last Change: 2014-09-16 19:46:49
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -20,8 +20,9 @@ set nojoinspaces           "  no space add when join two lines.(用j命令合并
 set whichwrap=b,s,<,>,[,]  "  对某一个或几个按键开启到头后自动折向下一行的功能
 set formatoptions+=m       "  如遇Unicode值大于255的文本，不必等到空格再折行。
 set formatoptions+=B       "  合并两行中文时，不在中间加空格：
-behave mswin
+set mat=4                  "  How many tenths of a second to blink
 
+behave mswin
 
 if g:notepad
     set guifont=MONACO:h10:cANSI
@@ -32,7 +33,7 @@ else
     " set guifont=YaHei_Consolas_Hybrid:h13  
     " set guifont=YaHei\ Mono:h13
     "
-    set guifont=MONACO:h11:cANSI
+    set guifont=MONACO:h12:cANSI
     set guifontwide=YaHei_Consolas_Hybrid:h13
     " set guifontwide=YouYuan:h14
 
@@ -358,3 +359,5 @@ endfunction
 " 这两种都可以
 " autocmd BufRead *.dot nmap <F5> :w<CR>:!dot -Tpng -o %<.png % && start %<.png<CR><CR>
 nmap <f5> :!dot -Tpng -o %<.png % && start %<.png<CR>
+
+" ================================================================================dot 画图设置

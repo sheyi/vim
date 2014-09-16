@@ -262,7 +262,7 @@ set nobackup                 " 不生成备份文件
 set noswapfile               " 不生成交换文件
 set list                     " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
 set listchars=tab:\~\ ,trail:.
-set expandtab                " 将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+" set expandtab                " 将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 "set showmatch               " 显示括号配对情况
 "set nowrap                  " 设置不自动换行
 
@@ -481,7 +481,7 @@ else
 endif
 
 " snipMate            Tab智能补全
-let g:snips_author = 'Ruchee'
+let g:snips_author = 'She Yi'
 if g:isWIN
     let g:snippets_dir = $VIM.'/snippets/'
 else
