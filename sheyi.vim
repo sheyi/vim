@@ -1,4 +1,4 @@
-" Last Change: 2014-09-14 22:03:34
+" Last Change: 2014-09-16 11:11:58
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -32,7 +32,7 @@ else
     " set guifont=YaHei_Consolas_Hybrid:h13  
     " set guifont=YaHei\ Mono:h13
     "
-    set guifont=MONACO:h12:cANSI
+    set guifont=MONACO:h11:cANSI
     set guifontwide=YaHei_Consolas_Hybrid:h13
     " set guifontwide=YouYuan:h14
 
@@ -66,8 +66,12 @@ nnoremap S s$
 
 map <leader>sa ggVG"
 map <C-c> "+y 
-map <C-v> "+p 
-
+" map <C-v> "+p 
+map <C-V>		"+gP
+cmap <C-V>		<C-R>+
+exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
+exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
+noremap <C-Q>		<C-V>
 " vnoremap <F3> "+y
 " map <F4>		<Esc><Esc>"+gP
 
