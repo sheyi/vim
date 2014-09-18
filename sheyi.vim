@@ -1,4 +1,4 @@
-" Last Change: 2014-09-16 19:46:49
+" Last Change: 2014-09-17 09:58:08
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++插件
 " ================================================================================电脑选择
@@ -39,7 +39,8 @@ else
 
 	" set background=light
 	" set background=dark
-    colorscheme solarized
+	colorscheme solarized
+    " colorscheme morning
 endif
 
 "set guifont=Courier_New:h10:cANSI	"设定字体
@@ -181,15 +182,27 @@ nmap ,c :copen
 nmap ,tr :Tab //r2<left><left><left>
 nmap ,tl :Tab //l2<left><left><left>
 nmap ,tc :Tab //c2<left><left><left>
-nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
-nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
-nnoremap <leader>( viw<esc>a)<esc>hbi(<esc>lel
-nnoremap <leader>[ viw<esc>a]<esc>hbi[<esc>lel
 
-vnoremap <leader>" <esc>a"<esc>gvo<esc>i"<esc>gvo<esc>ll
-vnoremap <leader>' <esc>a'<esc>gvo<esc>i'<esc>gvo<esc>ll
-vnoremap <leader>( <esc>a)<esc>gvo<esc>i(<esc>gvo<esc>ll
-vnoremap <leader>[ <esc>a]<esc>gvo<esc>i[<esc>gvo<esc>ll
+
+:vmap ,b "zdi<b><C-R>z</b><ESC>
+:vmap ,` "zdi`<C-R>z`<ESC>
+:vmap ,( "zdi(<C-R>z)<ESC>
+:vmap ,[ "zdi[<C-R>z]<ESC>
+:vmap ," "zdi"<C-R>z"<ESC>
+:vmap ,{ "zdi{<C-R>z}<ESC>
+
+
+
+
+" nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+" nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
+" nnoremap <leader>( viw<esc>a)<esc>hbi(<esc>lel
+" nnoremap <leader>[ viw<esc>a]<esc>hbi[<esc>lel
+
+" vnoremap <leader>" <esc>a"<esc>gvo<esc>i"<esc>gvo<esc>ll
+" vnoremap <leader>' <esc>a'<esc>gvo<esc>i'<esc>gvo<esc>ll
+" vnoremap <leader>( <esc>a)<esc>gvo<esc>i(<esc>gvo<esc>ll
+" vnoremap <leader>[ <esc>a]<esc>gvo<esc>i[<esc>gvo<esc>ll
 
 :map <space> viw
 " "."重复上一个命令，"u"取消上一个命令,"^r"反取消
